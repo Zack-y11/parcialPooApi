@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
+
 const cursoData = new mongoose.Schema({
     title: String,
     introduccion: String,
-    requisitos: Array,
+    requisitos: Array, // array de links a otros nodos
+    materialRecomendado: Array,
     nombreMaterial: String,
     tipo: String,
+    orden: Number,
     materialClase: Array, 
-    materialRecomenadado: String,
-
 })
 
 const Curso = mongoose.model("temas", cursoData);

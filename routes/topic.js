@@ -5,6 +5,7 @@ const fs = require('fs')
 
 route.get('/', async (req, res) => {
     try{
+        // API SHOULD RETURN 
         const cursos = await Curso.find();
         res.json(cursos)
     }catch(err){
@@ -13,17 +14,14 @@ route.get('/', async (req, res) => {
 });
 
 route.post('/', async (req, res) => {
-
-
-
-    console.log(req.body)
     const curso = new Curso({
         title: req.body.title,
         introduccion: req.body.introduccion,
+        orden: req.body.orden,
         requisitos: req.body.requisitos,
-        nombreMaterial: req.body.nombreMaterial,
-        tipo: req.body.tipo,
-        materialClase: req.body.materialClase,
+        nombreMaterial: null,
+        tipo: null,
+        materialClase: null,
         materialRecomendado: req.body.materialRecomendado
     });
 
@@ -56,19 +54,21 @@ async function getTopic(req, res, next){
 }
 
 route.put('/:id', getTopic, async(req, res)=>{
-    if(req.body.title != null){
-        res.curso.title = req.body.title
+    const allowedProperties = Object.keys(res.curso.schema.paths);
+    const updatedProperties = Object.keys(req.body);
+
+    for (const property of updatedProperties) {
+        if (allowedProperties.includes(property)) {
+            res.curso[property] = req.body[property];
+        }
     }
-    if(req.body.introduccion != null){
-        res.curso.introduccion = req.body.introduccion
-    }
-    
+
     try{
-        const updatedCurso = await res.curso.save()
-        res.json(updatedCurso)
-        console.log('Actualizado con exito')
+        const updatedCurso = await res.curso.save();
+        res.json(updatedCurso);
+        console.log('Successfully updated');
     }catch(err){
-        res.status(400).json({message: err.message})
+        res.status(400).json({message: err.message});
     }
 });
 
