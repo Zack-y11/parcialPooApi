@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const topicsData = require('./routes/topic')
+const fs = require('fs')
 
 
 const app = express();
@@ -17,7 +18,7 @@ app.get('/', (req, res)=>{
 
 app.use('/api/tema', topicsData)
 
-mongoose.connect('mongodb://localhost:27017/cursos');
+mongoose.connect('mongodb+srv://isaacromero315:N693cjWcnUAudBbu@clusterapipoo.twzmbqi.mongodb.net/cursos?retryWrites=true&w=majority&appName=ClusterApiPOO');
 
 
 

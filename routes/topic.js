@@ -1,6 +1,7 @@
 const express = require('express');
 const route = express.Router()
 const Curso = require('../models/topicsData')
+const fs = require('fs')
 
 route.get('/', async (req, res) => {
     try{
@@ -12,11 +13,16 @@ route.get('/', async (req, res) => {
 });
 
 route.post('/', async (req, res) => {
+
+
+
     console.log(req.body)
     const curso = new Curso({
         title: req.body.title,
         introduccion: req.body.introduccion,
         requisitos: req.body.requisitos,
+        nombreMaterial: req.body.nombreMaterial,
+        tipo: req.body.tipo,
         materialClase: req.body.materialClase,
         materialRecomendado: req.body.materialRecomendado
     });

@@ -4,7 +4,9 @@ const cursoData = new mongoose.Schema({
     title: String,
     introduccion: String,
     requisitos: Array,
-    materialClase: String,
+    nombreMaterial: String,
+    tipo: String,
+    materialClase: Array, 
     materialRecomenadado: String,
 
 })
