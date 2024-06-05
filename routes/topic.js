@@ -21,7 +21,7 @@ route.post('/', async (req, res) => {
         requisitos: req.body.requisitos,
         nombreMaterial: null,
         tipo: null,
-        materialClase: null,
+        materialClase: req.body.materialClase,
         materialRecomendado: req.body.materialRecomendado
     });
 
